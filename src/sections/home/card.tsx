@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
 
-// Icons
 import DescriptionIcon from "@mui/icons-material/Description";
 import HomeWork from "@mui/icons-material/HomeWork";
 import CheckCircle from "@mui/icons-material/CheckCircle";
@@ -40,12 +39,11 @@ export default function BuildingCard({ building, onManage }: Props) {
         position: "relative",
         overflow: "visible",
         "&:hover": {
-          borderColor: "#1976D2", // เปลี่ยนสีขอบเมื่อ hover
+          borderColor: "#1976D2",
         },
       }}
     >
       <CardContent sx={{ p: 3 }}>
-        {/* --- Header Section --- */}
         <Stack
           direction="row"
           justifyContent="space-between"
@@ -53,7 +51,6 @@ export default function BuildingCard({ building, onManage }: Props) {
           sx={{ mb: 3 }}
         >
           <Stack direction="row" spacing={2} alignItems="center">
-            {/* Building Icon */}
             <Box
               sx={{
                 width: 52,
@@ -90,7 +87,6 @@ export default function BuildingCard({ building, onManage }: Props) {
             size="small"
             disableElevation
             startIcon={<DescriptionIcon sx={{ fontSize: 18 }} />}
-            // ✅ คลิกที่ปุ่มนี้เท่านั้นถึงจะเปลี่ยนหน้า
             onClick={() => onManage(building.id)}
             sx={{
               textTransform: "none",
@@ -108,7 +104,6 @@ export default function BuildingCard({ building, onManage }: Props) {
           </Button>
         </Stack>
 
-        {/* --- Stats Section --- */}
         <Box
           sx={{
             bgcolor: "#F9FAFB",
@@ -149,7 +144,6 @@ export default function BuildingCard({ building, onManage }: Props) {
   );
 }
 
-// ✨ Stat Item Component
 function StatItem({
   icon,
   label,

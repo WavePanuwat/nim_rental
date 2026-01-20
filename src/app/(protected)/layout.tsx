@@ -1,7 +1,6 @@
-// ไฟล์: app/(protected)/layout.tsx
 "use client";
 
-import { Suspense } from "react"; // ✅ 1. เพิ่ม Import Suspense
+import { Suspense } from "react";
 import { usePathname } from "next/navigation";
 import Box from "@mui/material/Box";
 import Header from "../../components/header";
@@ -14,11 +13,9 @@ export default function ProtectedLayout({
 }) {
   const pathname = usePathname();
 
-  // ✅ Logic: เช็คว่าเป็นหน้า Home หรือไม่?
   const isHomePage = pathname === "/home" || pathname?.startsWith("/home/");
 
   return (
-    // ✅ 2. ครอบ Suspense ไว้ชั้นนอกสุด เพื่อรองรับการอ่าน URL ของ Header
     <Suspense fallback={<div>Loading...</div>}>
       <Box
         sx={{

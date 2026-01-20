@@ -1,8 +1,6 @@
-// ไฟล์: components/header.tsx
 "use client";
 
 import { useState, useMemo } from "react";
-// ✅ 1. Import useRouter เพื่อใช้เปลี่ยนหน้า
 import { useSearchParams, useRouter } from "next/navigation";
 
 import {
@@ -31,7 +29,6 @@ interface HeaderProps {
 }
 
 export default function Header({ isDashboard = false }: HeaderProps) {
-  // ✅ 2. ประกาศตัวแปร router
   const router = useRouter();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -54,12 +51,11 @@ export default function Header({ isDashboard = false }: HeaderProps) {
     setAnchorEl(null);
   };
 
-  // ✅ 3. แก้ไขฟังก์ชัน Logout ให้เด้งไปหน้า Login
   const handleLogout = () => {
     handleClose();
     console.log("Logging out...");
-    // ล้างค่า Token หรือ Session ตรงนี้ (ถ้ามี)
-    router.push("/login"); // ส่งไปหน้า Login
+
+    router.push("/login");
   };
 
   return (
@@ -72,13 +68,12 @@ export default function Header({ isDashboard = false }: HeaderProps) {
             justifyContent: "space-between",
           }}
         >
-          {/* ✅ 4. เพิ่ม onClick ที่ Stack ของ Logo เพื่อกลับหน้า Home */}
           <Stack
             direction="row"
             alignItems="center"
             spacing={1}
-            onClick={() => router.push("/home")} // กดแล้วกลับหน้า Home
-            sx={{ cursor: "pointer" }} // เปลี่ยนเมาส์เป็นรูปมือ
+            onClick={() => router.push("/home")}
+            sx={{ cursor: "pointer" }}
           >
             <Box
               component="img"
@@ -163,7 +158,6 @@ export default function Header({ isDashboard = false }: HeaderProps) {
               </MenuItem>
               <Divider />
 
-              {/* ปุ่มออกจากระบบ เรียกใช้ handleLogout ที่แก้ไว้ด้านบน */}
               <MenuItem onClick={handleLogout} sx={{ py: 1 }}>
                 <ListItemIcon>
                   <LogoutIcon fontSize="small" color="error" />
