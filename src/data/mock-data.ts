@@ -1,6 +1,5 @@
 import { User, Building, Room } from "../models/types";
 
-
 export const MOCK_USER: User = {
   username: "admin",
   password: "1234",

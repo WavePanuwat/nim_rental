@@ -3,8 +3,10 @@ import { Box, Paper, Typography } from "@mui/material";
 import { Person, Lock, PersonAdd } from "@mui/icons-material";
 import { Room } from "@/src/models/types";
 
+// 1. เพิ่ม onClick เข้าไปใน interface
 interface RoomCardProps {
   room: Room;
+  onClick: (room: Room) => void;
 }
 
 const STATUS_STYLE = {
@@ -28,7 +30,8 @@ const BASE_COLOR = {
   unpaid: "#C62828",
 };
 
-export default function RoomCard({ room }: RoomCardProps) {
+// 2. รับ prop onClick เข้ามาใช้งาน
+export default function RoomCard({ room, onClick }: RoomCardProps) {
   const style = STATUS_STYLE[room.status];
 
   const isUnpaid = !room.paid && room.status === "occupied";
@@ -49,8 +52,11 @@ export default function RoomCard({ room }: RoomCardProps) {
 
   return (
     <Box
+      // 3. ผูก Event Click ส่งข้อมูลห้องกลับไป
+      onClick={() => onClick(room)}
       sx={{
         width: "100%",
+        cursor: "pointer", // เปลี่ยนเคอร์เซอร์เป็นรูปมือ
         transition: "0.25s ease",
         "&:hover": {
           transform: showLock ? "none" : "translateY(-4px)",

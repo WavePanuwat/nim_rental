@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react"; // 1. เพิ่ม useState
 import { useSearchParams } from "next/navigation";
 import { Box, Container, Paper, Typography, Divider } from "@mui/material";
 import Grid from "@mui/material/Grid";
@@ -18,8 +18,10 @@ import {
 import RoomCard from "../room-card";
 import FilterSection from "../search-filter";
 import StatCard from "../stat-card";
+import RoomDetailModal from "./room-detail-modal"; // 2. Import Modal ที่สร้างไว้
 
 import { MOCK_ROOMS, calculateBuildingStats } from "@/src/data/mock-data";
+import { Room } from "@/src/models/types"; // 3. Import Type Room
 
 export default function RoomLayoutView() {
   const searchParams = useSearchParams();
@@ -27,6 +29,26 @@ export default function RoomLayoutView() {
 
   const stats = calculateBuildingStats(buildingId, MOCK_ROOMS);
   const displayRooms = MOCK_ROOMS.filter((r) => r.buildingId === buildingId);
+
+  // --- 4. เพิ่ม State สำหรับจัดการ Modal ---
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
+
+  // ฟังก์ชันเปิด
+  const handleCardClick = (room: Room) => {
+    // ถ้าห้องสถานะ maintenance (ปิดปรับปรุง) ไม่ต้องเปิด Modal
+    if (room.status === "maintenance") return;
+
+    setSelectedRoom(room);
+    setOpenModal(true);
+  };
+
+  // ฟังก์ชันปิด
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    setTimeout(() => setSelectedRoom(null), 300);
+  };
+  // ----------------------------------------
 
   return (
     <>
@@ -101,7 +123,8 @@ export default function RoomLayoutView() {
               <Grid container spacing={3} columns={{ xs: 4, sm: 8, md: 10 }}>
                 {displayRooms.map((room) => (
                   <Grid key={room.id} size={{ xs: 2, sm: 2, md: 2 }}>
-                    <RoomCard room={room} />
+                    {/* 5. ส่งฟังก์ชัน handleCardClick เข้าไป */}
+                    <RoomCard room={room} onClick={handleCardClick} />
                   </Grid>
                 ))}
 
@@ -121,6 +144,13 @@ export default function RoomLayoutView() {
           </Paper>
         </Container>
       </Box>
+
+      {/* 6. วาง Component Modal ไว้ตรงนี้ */}
+      <RoomDetailModal
+        open={openModal}
+        onClose={handleCloseModal}
+        room={selectedRoom}
+      />
     </>
   );
 }
