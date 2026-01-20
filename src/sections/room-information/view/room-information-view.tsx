@@ -9,13 +9,13 @@ import {
   Typography,
   Stack,
 } from "@mui/material";
-import InfoRow from "@/sections/room-information/info-row";
-import RentInformationDialog from "@/sections/room-information/rent-information-dialog";
-import { roomInformationMock } from "@/data/room-information/room-information.mock";
-import RentCard from "@/sections/room-information/rent-card";
-import RentAddBox from "@/sections/room-information/rent-add-box";
-import { RentItem } from "@/sections/room-information/types";
-import AppBarDanger from "@/components/app-bar-danger";
+import InfoRow from "@/src/sections/room-information/info-row";
+import RentInformationDialog from "@/src/sections/room-information/rent-information-dialog";
+import { roomInformationMock } from "@/src/data/room-information/room-information.mock";
+import RentCard from "@/src/sections/room-information/rent-card";
+import RentAddBox from "@/src/sections/room-information/rent-add-box";
+import { RentItem } from "@/src/sections/room-information/types";
+// import AppBarDanger from "@/components/app-bar-danger";
 
 const RoomInformationView: React.FC = () => {
   const [openDialog, setOpenDialog] = useState(false);
@@ -25,7 +25,7 @@ const RoomInformationView: React.FC = () => {
   return (
     <>
       {/* App Bar */}
-      <AppBarDanger />
+      {/* <AppBarDanger /> */}
       <Toolbar />
 
       <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
@@ -74,7 +74,7 @@ const RoomInformationView: React.FC = () => {
               </Typography>
             </Box>
 
-            <CardContent sx={{ p: 3   ,bgcolor: "#f5f6f8",}}>
+            <CardContent sx={{ p: 3, bgcolor: "#f5f6f8" }}>
               {rentList.length === 0 ? (
                 <Box sx={{ display: "flex", justifyContent: "center" }}>
                   <RentAddBox onClick={() => setOpenDialog(true)} />

@@ -25,7 +25,7 @@ import dayjs, { Dayjs } from "dayjs";
 import "dayjs/locale/th";
 
 export default function FilterSection() {
-  const [startMonth, setStartMonth] = useState<Dayjs | null>(null);
+  const [startMonth, setStartMonth] = useState<Dayjs | null>(dayjs());
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
 
   return (

@@ -14,6 +14,7 @@ export interface BuildingStats {
   unpaid: number;
 }
 
+
 export interface Building {
   id: number;
   name: string;

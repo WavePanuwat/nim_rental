@@ -54,8 +54,8 @@ export default function Header({ isDashboard = false }: HeaderProps) {
   const handleLogout = () => {
     handleClose();
     console.log("Logging out...");
-
-    router.push("/login");
+    // ล้างค่า Token หรือ Session ตรงนี้ (ถ้ามี)
+    router.push("/login"); // ส่งไปหน้า Login
   };
 
   return (
@@ -68,6 +68,7 @@ export default function Header({ isDashboard = false }: HeaderProps) {
             justifyContent: "space-between",
           }}
         >
+          {/* เพิ่ม onClick ที่ Stack ของ Logo เพื่อกลับหน้า Home */}
           <Stack
             direction="row"
             alignItems="center"
