@@ -35,7 +35,6 @@ export default function RoomCard({ room }: RoomCardProps) {
   const showLock = room.status === "maintenance";
   const showNextTenant = room.status === "occupied" && room.hasNextTenant;
 
-  // ✅ แสดง icon คน เฉพาะกรณีที่กำหนด
   const showUser =
     room.status === "occupied" ||
     (room.status === "empty" && !!room.moveOutDate);
