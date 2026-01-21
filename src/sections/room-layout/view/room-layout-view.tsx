@@ -18,7 +18,7 @@ import {
 import RoomCard from "../room-card";
 import FilterSection from "../search-filter";
 import StatCard from "../stat-card";
-import RoomDetailModal from "./room-detail-modal"; // 2. Import Modal ที่สร้างไว้
+import RoomDetailModal from "./room-detail-model"; // 2. Import Modal ที่สร้างไว้
 
 import { MOCK_ROOMS, calculateBuildingStats } from "@/src/data/mock-data";
 import { Room } from "@/src/models/types"; // 3. Import Type Room
