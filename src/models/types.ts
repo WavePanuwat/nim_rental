@@ -30,6 +30,25 @@ export interface Room {
   name: string;
   status: RoomStatus;
   paid: boolean;
+  location: string; 
+  address: string; 
   moveOutDate?: string;     
   hasNextTenant?: boolean;  
 }
+
+// sections/room-information/types.ts
+export type RoomInfo = {
+  roomNo: string;
+  branch: string;
+  location: string;
+  address: string;
+};
+
+export type RentItem = {
+  id: string;
+  renterType: string;
+  rentNo: string;
+  startDate: string;
+  endDate: string;
+  status: string;
+};

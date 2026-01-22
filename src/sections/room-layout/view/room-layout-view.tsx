@@ -1,8 +1,14 @@
 "use client";
 
-import React, { useState } from "react"; // 1. เพิ่ม useState
+import React, { useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { Box, Container, Paper, Typography, Divider } from "@mui/material";
+import {
+  Box,
+  Container,
+  Paper,
+  Typography,
+  Divider,
+} from "@mui/material";
 import Grid from "@mui/material/Grid";
 
 import Header from "@/src/components/header";
@@ -18,47 +24,81 @@ import {
 import RoomCard from "../room-card";
 import FilterSection from "../search-filter";
 import StatCard from "../stat-card";
-import RoomDetailModal from "./room-detail-model"; // 2. Import Modal ที่สร้างไว้
+import RoomDetailModal from "@/src/sections/room-layout/view/room-detail-model";
+import RentInformationDialog from "@/src/sections/room-layout/rent-info-dialog";
 
-import { MOCK_ROOMS, calculateBuildingStats } from "@/src/data/mock-data";
-import { Room } from "@/src/models/types"; // 3. Import Type Room
+import {
+  getBuildingById,
+  getRoomsByBuildingId,
+  getRentByRoomId,
+} from "@/src/data/room-data/registry";
+
+import { Room, RentItem } from "@/src/models/types";
 
 export default function RoomLayoutView() {
   const searchParams = useSearchParams();
   const buildingId = Number(searchParams.get("id") ?? 1);
 
-  const stats = calculateBuildingStats(buildingId, MOCK_ROOMS);
-  const displayRooms = MOCK_ROOMS.filter((r) => r.buildingId === buildingId);
+  /* =========================
+   * ดึงข้อมูลจาก registry
+   * ========================= */
+  const building = getBuildingById(buildingId);
+  const rooms = getRoomsByBuildingId(buildingId);
 
-  // --- 4. เพิ่ม State สำหรับจัดการ Modal ---
+  /* =========================
+   * คำนวณสถิติ
+   * ========================= */
+  const stats = {
+    total: rooms.length,
+    empty: rooms.filter((r) => r.status === "empty").length,
+    occupied: rooms.filter((r) => r.status === "occupied").length,
+    unpaid: rooms.filter(
+      (r) => r.status === "occupied" && !r.paid
+    ).length,
+  };
+
+  /* =========================
+   * Modal State
+   * ========================= */
   const [openModal, setOpenModal] = useState(false);
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
 
-  // ฟังก์ชันเปิด
-  const handleCardClick = (room: Room) => {
-    // ถ้าห้องสถานะ maintenance (ปิดปรับปรุง) ไม่ต้องเปิด Modal
-    if (room.status === "maintenance") return;
+  const [openRentDialog, setOpenRentDialog] = useState(false);
 
+  /* =========================
+   * derived state: rentList
+   * (ไม่ใช้ useEffect)
+   * ========================= */
+  const rentList: RentItem[] = selectedRoom
+    ? getRentByRoomId(buildingId, selectedRoom.id)
+    : [];
+
+  /* =========================
+   * Handlers
+   * ========================= */
+  const handleCardClick = (room: Room) => {
+    if (room.status === "maintenance") return;
     setSelectedRoom(room);
     setOpenModal(true);
   };
 
-  // ฟังก์ชันปิด
   const handleCloseModal = () => {
     setOpenModal(false);
     setTimeout(() => setSelectedRoom(null), 300);
   };
-  // ----------------------------------------
 
   return (
     <>
+      {/* ===== Header ===== */}
       <Box sx={{ position: "sticky", top: 0, zIndex: 1100 }}>
         <Header isDashboard />
         <Menu />
       </Box>
 
+      {/* ===== Content ===== */}
       <Box sx={{ minHeight: "100vh", bgcolor: "#F9FAFB", py: 5, px: 25 }}>
         <Container maxWidth="xl">
+          {/* ===== Stat ===== */}
           <Grid container spacing={3} mb={4}>
             <Grid size={{ xs: 12, sm: 6, md: 3 }}>
               <StatCard
@@ -94,8 +134,10 @@ export default function RoomLayoutView() {
             </Grid>
           </Grid>
 
+          {/* ===== Filter ===== */}
           <FilterSection />
 
+          {/* ===== Room List ===== */}
           <Paper
             elevation={0}
             sx={{
@@ -105,15 +147,9 @@ export default function RoomLayoutView() {
               overflow: "hidden",
             }}
           >
-            <Box
-              sx={{
-                px: 3,
-                py: 2.5,
-                backgroundColor: "#F3F4F6",
-              }}
-            >
-              <Typography fontSize={16} fontWeight={600} color="#111827">
-                ข้อมูลห้องพัก
+            <Box sx={{ px: 3, py: 2.5, bgcolor: "#F3F4F6" }}>
+              <Typography fontSize={16} fontWeight={600}>
+                ข้อมูลห้องพัก {building?.name}
               </Typography>
             </Box>
 
@@ -121,20 +157,15 @@ export default function RoomLayoutView() {
 
             <Box sx={{ p: 3 }}>
               <Grid container spacing={3} columns={{ xs: 4, sm: 8, md: 10 }}>
-                {displayRooms.map((room) => (
+                {rooms.map((room) => (
                   <Grid key={room.id} size={{ xs: 2, sm: 2, md: 2 }}>
-                    {/* 5. ส่งฟังก์ชัน handleCardClick เข้าไป */}
                     <RoomCard room={room} onClick={handleCardClick} />
                   </Grid>
                 ))}
 
-                {displayRooms.length === 0 && (
+                {rooms.length === 0 && (
                   <Grid size={12}>
-                    <Typography
-                      align="center"
-                      color="text.secondary"
-                      fontSize={14}
-                    >
+                    <Typography align="center" color="text.secondary">
                       ไม่พบข้อมูลห้องพักในตึกนี้ (ID: {buildingId})
                     </Typography>
                   </Grid>
@@ -145,11 +176,24 @@ export default function RoomLayoutView() {
         </Container>
       </Box>
 
-      {/* 6. วาง Component Modal ไว้ตรงนี้ */}
+      {/* ===== Room Detail Modal ===== */}
       <RoomDetailModal
         open={openModal}
         onClose={handleCloseModal}
         room={selectedRoom}
+        rentList={rentList}
+        onAddRent={() => setOpenRentDialog(true)}
+        onDeleteRent={() => {}}
+      />
+
+      {/* ===== Add Rent Dialog ===== */}
+      <RentInformationDialog
+        open={openRentDialog}
+        onClose={() => setOpenRentDialog(false)}
+        onSubmit={() => {
+          // mock only
+          setOpenRentDialog(false);
+        }}
       />
     </>
   );

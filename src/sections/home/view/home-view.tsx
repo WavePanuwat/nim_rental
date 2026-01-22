@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import Grid from "@mui/material/Grid";
 
 import Header from "@/src/components/header";
@@ -10,17 +10,23 @@ import SearchFilter from "../search-filter";
 import Tab from "../tab";
 import Card from "../card";
 
-import { MOCK_BUILDINGS } from "@/src/data/mock-data";
+import { getAllBuildings } from "@/src/data/room-data/registry";
 import { BuildingGroup } from "@/src/models/types";
 
 export default function HomeView() {
   const router = useRouter();
   const [tabValue, setTabValue] = useState(0);
 
+  // ✅ ดึงข้อมูลอาคารทั้งหมดจาก registry
+  const buildings = useMemo(() => getAllBuildings(), []);
+
+  // ✅ filter ตาม group (tab)
   const filteredBuildings = useMemo(() => {
     const groups: BuildingGroup[] = ["transport", "leasing", "daily"];
-    return MOCK_BUILDINGS.filter((item) => item.group === groups[tabValue]);
-  }, [tabValue]);
+    return buildings.filter(
+      (item) => item.group === groups[tabValue]
+    );
+  }, [buildings, tabValue]);
 
   return (
     <>
@@ -53,7 +59,9 @@ export default function HomeView() {
                 <Grid size={{ xs: 12, md: 6 }} key={building.id}>
                   <Card
                     building={building}
-                    onManage={(id) => router.push(`/room-layout?id=${id}`)}
+                    onManage={(id) =>
+                      router.push(`/room-layout?id=${id}`)
+                    }
                   />
                 </Grid>
               ))}

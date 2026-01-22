@@ -22,7 +22,8 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
 
-import { MOCK_USER, MOCK_BUILDINGS } from "../data/mock-data";
+import { MOCK_USER, } from "../data/mock-data";
+import { getBuildingById } from "@/src/data/room-data/registry";
 
 interface HeaderProps {
   isDashboard?: boolean;
@@ -37,11 +38,13 @@ export default function Header({ isDashboard = false }: HeaderProps) {
   const searchParams = useSearchParams();
   const buildingId = searchParams.get("id");
 
-  const selectedBuildingName = useMemo(() => {
-    if (!buildingId || !isDashboard) return "";
-    const building = MOCK_BUILDINGS.find((b) => b.id === Number(buildingId));
-    return building ? building.name : "";
-  }, [buildingId, isDashboard]);
+const selectedBuildingName = useMemo(() => {
+  if (!buildingId || !isDashboard) return "";
+
+  const building = getBuildingById(Number(buildingId));
+  return building?.name ?? "";
+}, [buildingId, isDashboard]);
+
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
