@@ -52,3 +52,16 @@ export type RentItem = {
   endDate: string;
   status: string;
 };
+
+
+export interface MeterData {
+  id: number;
+  room: string;
+  contractId: string;
+  serialNo: string;
+  tenant: string;
+  lastDate: string;
+  lastReading: number;
+  currentReading: string;
+  note: string;
+}
