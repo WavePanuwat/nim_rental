@@ -2,13 +2,7 @@
 
 import React, { useState } from "react";
 import { useSearchParams } from "next/navigation";
-import {
-  Box,
-  Container,
-  Paper,
-  Typography,
-  Divider,
-} from "@mui/material";
+import { Box, Container, Paper, Typography, Divider } from "@mui/material";
 import Grid from "@mui/material/Grid";
 
 import Header from "@/src/components/header";
@@ -39,43 +33,30 @@ export default function RoomLayoutView() {
   const searchParams = useSearchParams();
   const buildingId = Number(searchParams.get("id") ?? 1);
 
-  /* =========================
-   * ดึงข้อมูลจาก registry
-   * ========================= */
+  /* ดึงข้อมูลจาก registry */
   const building = getBuildingById(buildingId);
   const rooms = getRoomsByBuildingId(buildingId);
 
-  /* =========================
-   * คำนวณสถิติ
-   * ========================= */
+  /* คำนวณสถิติ */
   const stats = {
     total: rooms.length,
     empty: rooms.filter((r) => r.status === "empty").length,
     occupied: rooms.filter((r) => r.status === "occupied").length,
-    unpaid: rooms.filter(
-      (r) => r.status === "occupied" && !r.paid
-    ).length,
+    unpaid: rooms.filter((r) => r.status === "occupied" && !r.paid).length,
   };
 
-  /* =========================
-   * Modal State
-   * ========================= */
+  /*  Modal State */
   const [openModal, setOpenModal] = useState(false);
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
 
   const [openRentDialog, setOpenRentDialog] = useState(false);
 
-  /* =========================
-   * derived state: rentList
-   * (ไม่ใช้ useEffect)
-   * ========================= */
+  /*  derived state: rentList */
   const rentList: RentItem[] = selectedRoom
     ? getRentByRoomId(buildingId, selectedRoom.id)
     : [];
 
-  /* =========================
-   * Handlers
-   * ========================= */
+  /* Handlers */
   const handleCardClick = (room: Room) => {
     if (room.status === "maintenance") return;
     setSelectedRoom(room);
@@ -89,16 +70,16 @@ export default function RoomLayoutView() {
 
   return (
     <>
-      {/* ===== Header ===== */}
+      {/* Header */}
       <Box sx={{ position: "sticky", top: 0, zIndex: 1100 }}>
         <Header isDashboard />
         <Menu />
       </Box>
 
-      {/* ===== Content ===== */}
+      {/* Content*/}
       <Box sx={{ minHeight: "100vh", bgcolor: "#F9FAFB", py: 5, px: 25 }}>
         <Container maxWidth="xl">
-          {/* ===== Stat ===== */}
+          {/*  Stat */}
           <Grid container spacing={3} mb={4}>
             <Grid size={{ xs: 12, sm: 6, md: 3 }}>
               <StatCard
@@ -134,10 +115,10 @@ export default function RoomLayoutView() {
             </Grid>
           </Grid>
 
-          {/* ===== Filter ===== */}
+          {/*  Filter */}
           <FilterSection />
 
-          {/* ===== Room List ===== */}
+          {/* Room List  */}
           <Paper
             elevation={0}
             sx={{
@@ -149,7 +130,7 @@ export default function RoomLayoutView() {
           >
             <Box sx={{ px: 3, py: 2.5, bgcolor: "#F3F4F6" }}>
               <Typography fontSize={16} fontWeight={600}>
-                ข้อมูลห้องพัก {building?.name}
+                ข้อมูลห้อง
               </Typography>
             </Box>
 
