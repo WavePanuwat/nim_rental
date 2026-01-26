@@ -20,14 +20,14 @@ const MENU_ITEMS = [
     path: "/meter",
   },
   {
-    label: "บิลค่าเช่า",
+    label: "ประมวลผลค่าเช่า",
     icon: <ReceiptLongIcon />,
-    path: "/bill",
+    path: "/rental-process",
   },
   {
-    label: "จ่ายบิล",
+    label: "ประมวลผลใบเเจ้งหนี้",
     icon: <PaymentsIcon />,
-    path: "/payment",
+    path: "/invoice-process",
   },
 ];
 
@@ -68,7 +68,7 @@ export default function Menu() {
                     alignItems: "center",
                     justifyContent: "center",
 
-                    minWidth: 80,
+                    minWidth: 100,
                     height: 70,
 
                     bgcolor: active ? "#BCD3F5" : "transparent",
