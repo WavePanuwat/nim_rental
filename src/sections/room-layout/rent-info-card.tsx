@@ -10,23 +10,25 @@ type RentInfoCardProps = {
   rentList: RentItem[];
   onAdd: () => void;
   onDelete: (id: string) => void;
+  onClickRent: (item: RentItem) => void;
 };
-
 const RentInfoCard: React.FC<RentInfoCardProps> = ({
   rentList,
   onAdd,
   onDelete,
+  onClickRent,
 }) => {
   return (
     <Card
       sx={{
-        width: 1200,
+        maxWidth: 1100,
+        width: "100%",
         borderRadius: 4,
         bgcolor: "#f5f6f8",
         overflow: "hidden",
       }}
     >
-      {/* ===== Header ===== */}
+      {/* Header */}
       <Box
         sx={{
           bgcolor: "#1f3349",
@@ -42,7 +44,7 @@ const RentInfoCard: React.FC<RentInfoCardProps> = ({
         </Typography>
       </Box>
 
-      {/* ===== Content ===== */}
+      {/* Content */}
       <CardContent sx={{ p: 3 }}>
         {rentList.length === 0 ? (
           <Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -55,6 +57,7 @@ const RentInfoCard: React.FC<RentInfoCardProps> = ({
                 key={item.id}
                 item={item}
                 onDelete={onDelete}
+                onClick={onClickRent}
               />
             ))}
 

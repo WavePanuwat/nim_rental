@@ -3,25 +3,15 @@ import { Box, Paper, Typography } from "@mui/material";
 import { Person, Lock, PersonAdd } from "@mui/icons-material";
 import { Room } from "@/src/models/types";
 
-// 1. เพิ่ม onClick เข้าไปใน interface
 interface RoomCardProps {
   room: Room;
   onClick: (room: Room) => void;
 }
 
 const STATUS_STYLE = {
-  empty: {
-    bg: "#3F7F46",
-    icon: "#FFFFFF",
-  },
-  occupied: {
-    bg: "#3B4FA3",
-    icon: "#FFFFFF",
-  },
-  maintenance: {
-    bg: "#B4B4B4",
-    icon: "#FFFFFF",
-  },
+  empty: { bg: "#3F7F46", icon: "#FFFFFF" },
+  occupied: { bg: "#3B4FA3", icon: "#FFFFFF" },
+  maintenance: { bg: "#B4B4B4", icon: "#FFFFFF" },
 };
 
 const BASE_COLOR = {
@@ -30,7 +20,6 @@ const BASE_COLOR = {
   unpaid: "#C62828",
 };
 
-// 2. รับ prop onClick เข้ามาใช้งาน
 export default function RoomCard({ room, onClick }: RoomCardProps) {
   const style = STATUS_STYLE[room.status];
 
@@ -44,22 +33,21 @@ export default function RoomCard({ room, onClick }: RoomCardProps) {
 
   let footerText = "";
   if (room.status === "occupied" && room.moveOutDate) {
-    footerText = `สิ้นสุดการเช่า ${room.moveOutDate}`;
+    footerText = `สิ้นสุดการเช่าวันที่ ${room.moveOutDate}`;
   }
   if (room.status === "empty" && room.moveOutDate) {
-    footerText = `ว่างตั้งแต่ ${room.moveOutDate}`;
+    footerText = `ว่างตั้งแต่วันที่ ${room.moveOutDate}`;
   }
 
   return (
     <Box
-      // 3. ผูก Event Click ส่งข้อมูลห้องกลับไป
-      onClick={() => onClick(room)}
+      onClick={() => !showLock && onClick(room)}
       sx={{
         width: "100%",
-        cursor: "pointer", // เปลี่ยนเคอร์เซอร์เป็นรูปมือ
+        cursor: showLock ? "not-allowed" : "pointer",
         transition: "0.25s ease",
         "&:hover": {
-          transform: showLock ? "none" : "translateY(-4px)",
+          transform: showLock ? "none" : "translateY(-3px)",
         },
       }}
     >
@@ -67,9 +55,9 @@ export default function RoomCard({ room, onClick }: RoomCardProps) {
       <Typography
         align="center"
         sx={{
-          fontSize: "1rem",
+          fontSize: { xs: "0.85rem", sm: "1rem" },
           fontWeight: 600,
-          mb: 0.8,
+          mb: 0.5,
           color: BASE_COLOR.textPrimary,
         }}
       >
@@ -80,14 +68,13 @@ export default function RoomCard({ room, onClick }: RoomCardProps) {
         elevation={0}
         sx={{
           width: "100%",
-          maxWidth: 180,
+          maxWidth: { xs: 120, sm: 150, md: 180 },
           mx: "auto",
           aspectRatio: "1 / 1",
           borderRadius: "14px",
           backgroundColor: style.bg,
           border: `1px solid ${BASE_COLOR.border}`,
           position: "relative",
-          cursor: showLock ? "not-allowed" : "pointer",
           boxShadow: "0 4px 12px rgba(0,0,0,0.06)",
         }}
       >
@@ -98,9 +85,9 @@ export default function RoomCard({ room, onClick }: RoomCardProps) {
               position: "absolute",
               top: 6,
               left: 6,
-              px: 1.8,
-              py: 0.5,
-              fontSize: "0.8rem",
+              px: 1,
+              py: 0.3,
+              fontSize: "0.7rem",
               fontWeight: 700,
               borderRadius: "6px",
               bgcolor: BASE_COLOR.unpaid,
@@ -114,33 +101,40 @@ export default function RoomCard({ room, onClick }: RoomCardProps) {
 
         {/* ผู้เช่าถัดไป */}
         {showNextTenant && (
-          <Box sx={{ position: "absolute", top: 10, right: 10 }}>
-            <PersonAdd sx={{ fontSize: 28, color: style.icon }} />
+          <Box sx={{ position: "absolute", top: 6, right: 6 }}>
+            <PersonAdd
+              sx={{
+                fontSize: { xs: 20, sm: 24 },
+                color: style.icon,
+              }}
+            />
           </Box>
         )}
 
+        {/* icon คน */}
         {showUser && (
           <Box
             sx={{
               position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: 100,
-              height: 100,
+              inset: 0,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               pointerEvents: "none",
             }}
           >
-            <Person sx={{ fontSize: 120, color: style.icon }} />
+            <Person
+              sx={{
+                fontSize: { xs: 70, sm: 90, md: 110 },
+                color: style.icon,
+              }}
+            />
           </Box>
         )}
 
         {/* icon lock */}
         {showLock && (
-          <Box sx={{ position: "absolute", bottom: 10, right: 10 }}>
+          <Box sx={{ position: "absolute", bottom: 6, right: 6 }}>
             <Lock sx={{ fontSize: 18, color: style.icon }} />
           </Box>
         )}
@@ -150,21 +144,19 @@ export default function RoomCard({ room, onClick }: RoomCardProps) {
           <Box
             sx={{
               position: "absolute",
-              bottom: 8,
-              left: "50%",
-              transform: "translateX(-50%)",
-              width: 160,
+              bottom: 6,
+              left: 6,
+              right: 6,
               backgroundColor: "rgba(0,0,0,0.55)",
               borderRadius: "6px",
-              px: 1,
-              py: 0.6,
-              backdropFilter: "blur(3px)",
+              px: 0.8,
+              py: 0.4,
               textAlign: "center",
             }}
           >
             <Typography
               sx={{
-                fontSize: "0.8rem",
+                fontSize: "0.7rem",
                 color: "#FFFFFF",
                 fontWeight: 600,
                 whiteSpace: "nowrap",

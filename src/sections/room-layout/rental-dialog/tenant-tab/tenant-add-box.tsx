@@ -1,7 +1,8 @@
 import { Box, Typography } from "@mui/material";
 
 type Props = {
-  onClick: () => void;
+  label: string;
+  onClick?: () => void;
 };
 
 const RentAddBox: React.FC<Props> = ({ onClick }) => {
@@ -9,8 +10,8 @@ const RentAddBox: React.FC<Props> = ({ onClick }) => {
     <Box
       onClick={onClick}
       sx={{
-        width: 900,
-        height: 130,
+        width: 1000,
+        height: 150,
         border: "1px dashed",
         borderColor: "divider",
         borderRadius: 2,
@@ -25,7 +26,7 @@ const RentAddBox: React.FC<Props> = ({ onClick }) => {
       }}
     >
       <Typography fontSize={16} fontWeight={600}>
-        + เพิ่มข้อมูลการเช่า
+        + เพิ่มข้อมูลผู้เช่า
       </Typography>
     </Box>
   );

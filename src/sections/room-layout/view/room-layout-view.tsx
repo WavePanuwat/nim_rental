@@ -9,7 +9,6 @@ import {
   Typography,
   Divider,
 } from "@mui/material";
-import Grid from "@mui/material/Grid";
 
 import Header from "@/src/components/header";
 import Menu from "@/src/components/menu";
@@ -25,7 +24,7 @@ import RoomCard from "../room-card";
 import FilterSection from "../search-filter";
 import StatCard from "../stat-card";
 import RoomDetailModal from "@/src/sections/room-layout/view/room-detail-model";
-import RentInformationDialog from "@/src/sections/room-layout/rent-info-dialog";
+import RentInformationDialog from "@/src/sections/room-layout/rent-add-form";
 
 import {
   getBuildingById,
@@ -40,13 +39,13 @@ export default function RoomLayoutView() {
   const buildingId = Number(searchParams.get("id") ?? 1);
 
   /* =========================
-   * ดึงข้อมูลจาก registry
+   * ข้อมูลจาก registry
    * ========================= */
   const building = getBuildingById(buildingId);
   const rooms = getRoomsByBuildingId(buildingId);
 
   /* =========================
-   * คำนวณสถิติ
+   * Stats
    * ========================= */
   const stats = {
     total: rooms.length,
@@ -58,19 +57,23 @@ export default function RoomLayoutView() {
   };
 
   /* =========================
-   * Modal State
+   * State
    * ========================= */
   const [openModal, setOpenModal] = useState(false);
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
 
+  // mock เพิ่มสัญญา
+  const [tempRents, setTempRents] = useState<RentItem[]>([]);
   const [openRentDialog, setOpenRentDialog] = useState(false);
 
   /* =========================
-   * derived state: rentList
-   * (ไม่ใช้ useEffect)
+   * derived rentList
    * ========================= */
   const rentList: RentItem[] = selectedRoom
-    ? getRentByRoomId(buildingId, selectedRoom.id)
+    ? [
+        ...getRentByRoomId(buildingId, selectedRoom.id),
+        ...tempRents,
+      ]
     : [];
 
   /* =========================
@@ -78,7 +81,9 @@ export default function RoomLayoutView() {
    * ========================= */
   const handleCardClick = (room: Room) => {
     if (room.status === "maintenance") return;
+
     setSelectedRoom(room);
+    setTempRents([]);
     setOpenModal(true);
   };
 
@@ -96,45 +101,47 @@ export default function RoomLayoutView() {
       </Box>
 
       {/* ===== Content ===== */}
-      <Box sx={{ minHeight: "100vh", bgcolor: "#F9FAFB", py: 5, px: 25 }}>
+      <Box sx={{ minHeight: "100vh", bgcolor: "#F9FAFB", py: 5 }}>
         <Container maxWidth="xl">
           {/* ===== Stat ===== */}
-          <Grid container spacing={3} mb={4}>
-            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-              <StatCard
-                label="ห้องทั้งหมด"
-                value={stats.total}
-                icon={<HomeWork />}
-                color="#6366F1"
-              />
-            </Grid>
-            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-              <StatCard
-                label="ห้องว่าง"
-                value={stats.empty}
-                icon={<CheckCircle />}
-                color="#16A34A"
-              />
-            </Grid>
-            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-              <StatCard
-                label="ไม่ว่าง"
-                value={stats.occupied}
-                icon={<MeetingRoom />}
-                color="#2563EB"
-              />
-            </Grid>
-            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-              <StatCard
-                label="ค้างชำระ"
-                value={stats.unpaid}
-                icon={<MoneyOff />}
-                color="#DC2626"
-              />
-            </Grid>
-          </Grid>
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: {
+                xs: "1fr",
+                sm: "1fr 1fr",
+                md: "repeat(4, 1fr)",
+              },
+              gap: 3,
+              mb: 4,
+            }}
+          >
+            <StatCard
+              label="ห้องทั้งหมด"
+              value={stats.total}
+              icon={<HomeWork />}
+              color="#6366F1"
+            />
+            <StatCard
+              label="ห้องว่าง"
+              value={stats.empty}
+              icon={<CheckCircle />}
+              color="#16A34A"
+            />
+            <StatCard
+              label="ไม่ว่าง"
+              value={stats.occupied}
+              icon={<MeetingRoom />}
+              color="#2563EB"
+            />
+            <StatCard
+              label="ค้างชำระ"
+              value={stats.unpaid}
+              icon={<MoneyOff />}
+              color="#DC2626"
+            />
+          </Box>
 
-          {/* ===== Filter ===== */}
           <FilterSection />
 
           {/* ===== Room List ===== */}
@@ -143,8 +150,7 @@ export default function RoomLayoutView() {
             sx={{
               borderRadius: 3,
               border: "1px solid #E5E7EB",
-              backgroundColor: "#FFFFFF",
-              overflow: "hidden",
+              mt: 3,
             }}
           >
             <Box sx={{ px: 3, py: 2.5, bgcolor: "#F3F4F6" }}>
@@ -156,21 +162,27 @@ export default function RoomLayoutView() {
             <Divider />
 
             <Box sx={{ p: 3 }}>
-              <Grid container spacing={3} columns={{ xs: 4, sm: 8, md: 10 }}>
+              {/* 🔥 CSS GRID ล็อก 5 ช่อง */}
+              <Box
+                sx={{
+                  display: "grid",
+                  gridTemplateColumns: {
+                    xs: "repeat(2, 1fr)",
+                    sm: "repeat(4, 1fr)",
+                    md: "repeat(5, 1fr)", // ✅ ล็อก 5
+                  },
+                  gap: 3,
+                  justifyItems: "center",
+                }}
+              >
                 {rooms.map((room) => (
-                  <Grid key={room.id} size={{ xs: 2, sm: 2, md: 2 }}>
-                    <RoomCard room={room} onClick={handleCardClick} />
-                  </Grid>
+                  <RoomCard
+                    key={room.id}
+                    room={room}
+                    onClick={handleCardClick}
+                  />
                 ))}
-
-                {rooms.length === 0 && (
-                  <Grid size={12}>
-                    <Typography align="center" color="text.secondary">
-                      ไม่พบข้อมูลห้องพักในตึกนี้ (ID: {buildingId})
-                    </Typography>
-                  </Grid>
-                )}
-              </Grid>
+              </Box>
             </Box>
           </Paper>
         </Container>
@@ -183,15 +195,26 @@ export default function RoomLayoutView() {
         room={selectedRoom}
         rentList={rentList}
         onAddRent={() => setOpenRentDialog(true)}
-        onDeleteRent={() => {}}
+        onDeleteRent={(id) =>
+          setTempRents((prev) => prev.filter((r) => r.id !== id))
+        }
       />
 
       {/* ===== Add Rent Dialog ===== */}
       <RentInformationDialog
         open={openRentDialog}
+        room={
+          selectedRoom
+            ? {
+                roomNo: selectedRoom.name,
+                buildingName: building?.name ?? "",
+                address: selectedRoom.address ?? "",
+              }
+            : null
+        }
         onClose={() => setOpenRentDialog(false)}
-        onSubmit={() => {
-          // mock only
+        onSubmit={(data) => {
+          setTempRents((prev) => [...prev, data]);
           setOpenRentDialog(false);
         }}
       />

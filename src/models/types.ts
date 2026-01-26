@@ -23,7 +23,6 @@ export interface Building {
 }
 
 export type RoomStatus = "empty" | "occupied" | "maintenance";
-
 export interface Room {
   id: number;
   buildingId: number;
@@ -36,7 +35,15 @@ export interface Room {
   hasNextTenant?: boolean;  
 }
 
-// sections/room-information/types.ts
+// room-information
+export type RentInfo = {
+  id: string;
+  tenantName: string;
+  contractNo: string;
+  startDate: string;
+  endDate: string;
+};
+
 export type RoomInfo = {
   roomNo: string;
   branch: string;
@@ -44,16 +51,17 @@ export type RoomInfo = {
   address: string;
 };
 
+export type RentStatus = "active" | "ending" | "next";
 export type RentItem = {
   id: string;
-  renterType: string;
   rentNo: string;
+  renterType: string;
   startDate: string;
   endDate: string;
-  status: string;
+  status: RentStatus; // active | ending | next
 };
 
-
+// Meter
 export interface MeterData {
   id: number;
   room: string;
@@ -65,3 +73,13 @@ export interface MeterData {
   currentReading: string;
   note: string;
 }
+
+// Tenant Info
+export type TenantInfo = {
+  firstName: string;
+  lastName: string;
+  birthDate: string;
+  age?: string;
+  phone?: string;
+  address?: string;
+};

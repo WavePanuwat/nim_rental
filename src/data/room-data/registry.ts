@@ -55,7 +55,7 @@ import { RENT_BY_ROOM as RENT_7 } from "./building-7/rent";
 export type RoomRegistryItem = {
   building: Building;
   rooms: Room[];
-  rents?: Record<number, RentItem[]>;
+  rents: Record<number, RentItem[]>;
 };
 
 /* ======================================================
@@ -76,21 +76,24 @@ export const ROOM_DATA_REGISTRY: Record<number, RoomRegistryItem> = {
  * ====================================================== */
 
 /** ดึงข้อมูลอาคาร */
-export const getBuildingById = (buildingId: number): Building | null =>
-  ROOM_DATA_REGISTRY[buildingId]?.building ?? null;
+export const getBuildingById = (buildingId: number): Building | null => {
+  return ROOM_DATA_REGISTRY[buildingId]?.building ?? null;
+};
 
 /** ดึงห้องทั้งหมดของอาคาร */
-export const getRoomsByBuildingId = (buildingId: number): Room[] =>
-  ROOM_DATA_REGISTRY[buildingId]?.rooms ?? [];
+export const getRoomsByBuildingId = (buildingId: number): Room[] => {
+  return ROOM_DATA_REGISTRY[buildingId]?.rooms ?? [];
+};
 
 /** ดึงข้อมูลการเช่าของห้อง */
 export const getRentByRoomId = (
   buildingId: number,
   roomId: number
-): RentItem[] =>
-  ROOM_DATA_REGISTRY[buildingId]?.rents?.[roomId] ?? [];
+): RentItem[] => {
+  return ROOM_DATA_REGISTRY[buildingId]?.rents?.[roomId] ?? [];
+};
 
-/** ดึงอาคารทั้งหมด (ใช้กับ Header / หน้าเลือกตึก) */
+/** ดึงอาคารทั้งหมด (ใช้หน้า Home / Header) */
 export const getAllBuildings = (): Building[] => {
   return Object.values(ROOM_DATA_REGISTRY).map(({ building, rooms }) => ({
     ...building,
