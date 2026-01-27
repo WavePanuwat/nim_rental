@@ -10,14 +10,12 @@ export const ROOM_RENTAL_LEFT: RoomTenantField[] = [
   { label: "สถานที่", value: "บ้านเพื่อน แมนชั่น" },
   { label: "ห้อง", value: "101" },
   { label: "พื้นที่", value: "0" },
-  {
-    label: "ที่ตั้ง",
-    value: "161 ม.9 ต.หนองหาร อ.สันทราย จ.เชียงใหม่ 50290",
-  },
+  { label: "ที่ตั้ง", value: "161 ม.9 ต.หนองหาร อ.สันทราย จ.เชียงใหม่ 50290"},
   { label: "หมายเหตุ", value: "-" },
 ];
 
 export const ROOM_RENTAL_RIGHT: RoomTenantField[] = [
+  { label: "สถานะ", value: "ยืนยัน" },
   { label: "เลขที่สัญญา", value: "MMJ68120001" },
   { label: "ประเภทสัญญา", value: "อาคารเช่า" },
   { label: "วันสิ้นสุดสัญญา", value: "30/11/2569" },

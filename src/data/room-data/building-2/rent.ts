@@ -12,7 +12,7 @@ export const RENT_BY_ROOM: Record<number, RentItem[]> = {
       id: "b2-102-1",
       rentNo: "B2-CT102",
       renterType: "บุคคลธรรมดา",
-      status: "active",
+      status: "Approved",
     }),
   ],
 
@@ -22,7 +22,7 @@ export const RENT_BY_ROOM: Record<number, RentItem[]> = {
       id: "b2-103-1",
       rentNo: "B2-CT103",
       renterType: "บุคคลธรรมดา",
-      status: "active",
+      status: "Approved",
     }),
   ],
 
@@ -32,7 +32,7 @@ export const RENT_BY_ROOM: Record<number, RentItem[]> = {
       id: "b2-104-1",
       rentNo: "B2-CT104",
       renterType: "บุคคลธรรมดา",
-      status: "ending",
+      status: "Approved",
       endDate: "15",
     }),
   ],

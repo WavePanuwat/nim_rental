@@ -6,6 +6,7 @@ export const TENANT_MOCK: TenantInfo[] = [
   id: "t1",
   firstName: "ชัชวาล",
   lastName: "เมธากุล",
+  age: 29,
   address: "15/4 ม.5 ตำบลริมกก อำเภอเมืองเชียงราย จังหวัด เชียงราย",
   phone: "0812345678",
   birthDate: "15/04/2535",

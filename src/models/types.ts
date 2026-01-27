@@ -51,14 +51,14 @@ export type RoomInfo = {
   address: string;
 };
 
-export type RentStatus = "active" | "ending" | "next";
+export type RentStatus = "Approved" | "Confirm" | "Canceled" | "Closed";
 export type RentItem = {
   id: string;
   rentNo: string;
   renterType: string;
   startDate: string;
   endDate: string;
-  status: RentStatus; // active | ending | next
+  status: RentStatus;
 };
 
 // Meter
@@ -79,6 +79,7 @@ export type TenantInfo = {
   id: string;
   firstName: string;
   lastName: string;
+  age?: number;
   address: string;
   phone: string;
   birthDate?: string;

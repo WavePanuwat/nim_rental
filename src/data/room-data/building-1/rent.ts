@@ -14,7 +14,7 @@ export const RENT_BY_ROOM: Record<number, RentItem[]> = {
       renterType: "บุคคลธรรมดา",
       startDate: "01/12/2568",
       endDate: "30/11/2569",
-      status: "ending",
+      status: "Approved",
     }),
   ],
 
@@ -26,7 +26,7 @@ export const RENT_BY_ROOM: Record<number, RentItem[]> = {
       renterType: "บุคคลธรรมดา",
       startDate: "01/01/2568",
       endDate: "31/12/2568",
-      status: "active",
+      status: "Approved",
     }),
   ],
 
@@ -38,7 +38,7 @@ export const RENT_BY_ROOM: Record<number, RentItem[]> = {
       renterType: "บุคคลธรรมดา",
       startDate: "01/01/2568",
       endDate: "15/01/2569",
-      status: "ending",
+      status: "Approved",
     }),
   ],
   // ห้องมี 2 คน (คนเดิมกำลังออก + แสดงวันออก + คนใหม่มาต่อ)
@@ -49,7 +49,7 @@ export const RENT_BY_ROOM: Record<number, RentItem[]> = {
       renterType: "บุคคลธรรมดา",
       startDate: "01/01/2568",
       endDate: "15/01/2569",
-      status: "ending",
+      status: "Approved",
     }),
     createMockRent({
       id: "rent-105-2",
@@ -57,7 +57,7 @@ export const RENT_BY_ROOM: Record<number, RentItem[]> = {
       renterType: "บุคคลธรรมดา",
       startDate: "16/01/2569",
       endDate: "15/01/2570",
-      status: "next",
+      status: "Approved",
     }),
   ],
 
@@ -70,7 +70,7 @@ export const RENT_BY_ROOM: Record<number, RentItem[]> = {
       renterType: "บุคคลธรรมดา",
       startDate: "01/12/2568",
       endDate: "30/11/2569",
-      status: "ending",
+      status: "Approved",
     }),
   ],
 
@@ -81,7 +81,7 @@ export const RENT_BY_ROOM: Record<number, RentItem[]> = {
       renterType: "บุคคลธรรมดา",
       startDate: "01/01/2568",
       endDate: "31/12/2568",
-      status: "active",
+      status: "Approved",
     }),
   ],
 };

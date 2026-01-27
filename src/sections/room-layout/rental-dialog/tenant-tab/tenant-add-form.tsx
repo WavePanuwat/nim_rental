@@ -15,7 +15,7 @@ import {
   InputAdornment,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { TenantInfo } from "./tenant-info-card";
+import { TenantInfo } from "@/src/models/types";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import { useState } from "react";
 

@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
 import CloseIcon from "@mui/icons-material/Close";
-
+import RentalHeaderButton from "@/src/sections/room-layout/rental-dialog/rental-header-button";
 import RentalInfoRow from "@/src/sections/room-layout/rental-dialog/rental-info-row";
 import RentalDialogPaper from "@/src/sections/room-layout/rental-dialog/rental-dialog-paper";
 import { RentItem } from "@/src/models/types";
@@ -84,9 +84,7 @@ export default function RoomRentalView({ open, rent, onClose }: Props) {
           }}
         >
           {/* Title */}
-          <Typography variant="h6" fontWeight={600} mb={2}>
-            รายละเอียดผู้เช่า
-          </Typography>
+          <RentalHeaderButton />
 
           {/* Info */}
           <RentalInfoRow />
