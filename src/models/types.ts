@@ -87,3 +87,38 @@ export type TenantInfo = {
   passportNo?: string;     // หนังสือเดินทาง
   employeeCode?: string;   // รหัสพนักงาน
 };
+
+export interface IInvoiceProcessItem {
+  id: string;
+  processDate: string;
+  period: string;
+  invoiceCount: number;
+  totalAmount: number;
+  status: string;
+}
+
+export type IInvoiceDetailItem = {
+  id: number;
+  dueDate: string;
+  roomNumber: string;
+  customerName: string;
+  rentAmount: number;
+  elecAmount: number;
+  waterAmount: number;
+  otherAmount: number;
+  totalAmount: number;
+  status: string;
+};
+
+export type IInvoiceDetailSummary = {
+  grandTotal: number;
+  totalRent: number;
+  totalWater: number;
+  totalElec: number;
+  totalOther: number;
+};
+
+export type IInvoiceDetailData = {
+  summary: IInvoiceDetailSummary;
+  items: IInvoiceDetailItem[];
+};
