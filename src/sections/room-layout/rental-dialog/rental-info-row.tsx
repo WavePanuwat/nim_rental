@@ -15,7 +15,7 @@ const RentalInfoRow = () => {
       elevation={1}
       sx={{
         width: "100%",
-        borderRadius: 1.5,
+        borderRadius: 4,
         overflow: "hidden",
         position: "relative",
       }}

@@ -22,7 +22,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
 
-import { MOCK_USER } from "../data/mock-data";
+import { MOCK_USER } from "../data/user-mock";
 import { getBuildingById } from "@/src/data/room-data/registry";
 
 interface HeaderProps {

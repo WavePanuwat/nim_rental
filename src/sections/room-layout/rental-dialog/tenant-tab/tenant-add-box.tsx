@@ -10,7 +10,7 @@ const RentAddBox: React.FC<Props> = ({ onClick }) => {
     <Box
       onClick={onClick}
       sx={{
-        width: 1000,
+        width: 900,
         height: 150,
         border: "1px dashed",
         borderColor: "divider",

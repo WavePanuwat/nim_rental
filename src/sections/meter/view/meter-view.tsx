@@ -8,7 +8,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import Header from "@/src/components/header";
 import Menu from "@/src/components/menu";
 
-import { MOCK_METER_DATA } from "@/src/data/mock-data";
+import { MOCK_METER_DATA } from "@/src/data/meter-mock";
 import MeterHeader from "@/src/sections/meter/meter-filter";
 import MeterToggle from "@/src/sections/meter/meter-toggle";
 import MeterActions from "@/src/sections/meter/meter-actions";

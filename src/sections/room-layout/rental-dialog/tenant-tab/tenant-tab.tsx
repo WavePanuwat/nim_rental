@@ -4,7 +4,7 @@ import TenantAddBox from "./tenant-add-box";
 import TenantAddForm from "./tenant-add-form";
 import TenantInfoCard from "./tenant-info-card";
 import { TENANT_MOCK } from "@/src/data/room-rental/tenant.mock";
-import { TenantInfo } from "./tenant-info-card";
+import { TenantInfo } from "@/src/models/types";
 
 const TenantTab = () => {
   const [openAdd, setOpenAdd] = useState(false);

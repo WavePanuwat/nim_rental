@@ -162,14 +162,13 @@ export default function RoomLayoutView() {
             <Divider />
 
             <Box sx={{ p: 3 }}>
-              {/* 🔥 CSS GRID ล็อก 5 ช่อง */}
               <Box
                 sx={{
                   display: "grid",
                   gridTemplateColumns: {
                     xs: "repeat(2, 1fr)",
                     sm: "repeat(4, 1fr)",
-                    md: "repeat(5, 1fr)", // ✅ ล็อก 5
+                    md: "repeat(5, 1fr)", // 
                   },
                   gap: 3,
                   justifyItems: "center",

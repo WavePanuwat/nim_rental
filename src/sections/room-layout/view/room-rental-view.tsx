@@ -45,7 +45,7 @@ export default function RoomRentalView({ open, rent, onClose }: Props) {
       {/* ===== Header ===== */}
       <DialogTitle
         sx={{
-          bgcolor: "#1f2d3d",
+          bgcolor: "#D70024",
           color: "white",
           display: "flex",
           alignItems: "center",
@@ -53,7 +53,9 @@ export default function RoomRentalView({ open, rent, onClose }: Props) {
           boxShadow: 2,
         }}
       >
-        <Typography fontWeight={600}>ข้อมูลการเช่า</Typography>
+        <Typography fontWeight={600}>
+          ข้อมูลการเช่า
+        </Typography>
 
         <IconButton
           onClick={onClose}

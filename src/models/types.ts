@@ -76,10 +76,14 @@ export interface MeterData {
 
 // Tenant Info
 export type TenantInfo = {
+  id: string;
   firstName: string;
   lastName: string;
-  birthDate: string;
-  age?: string;
-  phone?: string;
-  address?: string;
+  address: string;
+  phone: string;
+  birthDate?: string;
+  citizenId?: string;      // เลขบัตรประชาชน
+  nonCitizenId?: string;   // บัตรคนไม่มีสัญชาติ
+  passportNo?: string;     // หนังสือเดินทาง
+  employeeCode?: string;   // รหัสพนักงาน
 };
