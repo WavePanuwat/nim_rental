@@ -5,6 +5,7 @@ import { Paper, Box, Tabs, Tab, Typography } from "@mui/material";
 import { RENTAL_TABS } from "@/src/data/room-rental/room-rental.mock";
 
 import TenantTab from "./tenant-tab/tenant-tab";
+import LessorTab from "./lessor-tab/lessor-tab"; // 1. นำเข้า LessorTab
 
 const TAB_HEADER_HEIGHT = 60;
 
@@ -48,6 +49,9 @@ const RentalDialogPaper = () => {
             "& .Mui-selected": {
               backgroundColor: "#2f80ed",
             },
+            "& .MuiTabs-indicator": {
+              backgroundColor: "transparent", // ซ่อน Indicator เดิมถ้าต้องการให้เหมือน tab card
+            }
           }}
         >
           {RENTAL_TABS.map((label, index) => (
@@ -58,8 +62,14 @@ const RentalDialogPaper = () => {
 
       {/* Content */}
       <Box sx={{ p: 3 }}>
+        {/* Tab 0: ผู้เช่า */}
         {tabIndex === 0 && <TenantTab />}
-        {tabIndex !== 0 && (
+
+        {/* Tab 1: ผู้ให้เช่า (เรียกใช้ตรงนี้) */}
+        {tabIndex === 1 && <LessorTab />}
+
+        {/* Tab อื่นๆ ที่ยังไม่มีข้อมูล */}
+        {tabIndex > 1 && (
           <Typography color="text.secondary">ยังไม่มีข้อมูล</Typography>
         )}
       </Box>
