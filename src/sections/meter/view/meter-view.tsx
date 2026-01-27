@@ -28,8 +28,10 @@ export default function MeterReadingView() {
         <Container
           maxWidth={false}
           sx={{
-            mt: 4,
             maxWidth: "1200px",
+            mx: "auto",
+            mt: 5,
+            px: { xs: 2, md: 0 },
           }}
         >
           <MeterHeader />

@@ -14,7 +14,15 @@ export default function RentalProcessView() {
         <Header isDashboard />
         <Menu />
       </Box>
-      <Container maxWidth="xl" sx={{ py: 3 }}>
+      <Container
+        maxWidth={false}
+        sx={{
+          maxWidth: "1200px",
+          mx: "auto",
+          mt: 5,
+          px: { xs: 2, md: 0 },
+        }}
+      >
         {/* 1. ส่วน Filter ด้านบน */}
         <RentalProcessFilter />
 
