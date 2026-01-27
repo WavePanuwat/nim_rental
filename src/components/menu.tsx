@@ -7,6 +7,7 @@ import ApartmentIcon from "@mui/icons-material/Apartment";
 import SpeedIcon from "@mui/icons-material/Speed";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import PaymentsIcon from "@mui/icons-material/Payments";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 
 const MENU_ITEMS = [
   {
@@ -28,6 +29,11 @@ const MENU_ITEMS = [
     label: "ประมวลผลใบเเจ้งหนี้",
     icon: <PaymentsIcon />,
     path: "/invoice-process",
+  },
+  {
+    label: "รับชำระ",
+    icon: <AccountBalanceWalletIcon />,
+    path: "/payment",
   },
 ];
 

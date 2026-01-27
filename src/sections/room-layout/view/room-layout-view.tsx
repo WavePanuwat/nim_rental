@@ -2,13 +2,7 @@
 
 import React, { useState } from "react";
 import { useSearchParams } from "next/navigation";
-import {
-  Box,
-  Container,
-  Paper,
-  Typography,
-  Divider,
-} from "@mui/material";
+import { Box, Container, Paper, Typography, Divider } from "@mui/material";
 
 import Header from "@/src/components/header";
 import Menu from "@/src/components/menu";
@@ -51,9 +45,7 @@ export default function RoomLayoutView() {
     total: rooms.length,
     empty: rooms.filter((r) => r.status === "empty").length,
     occupied: rooms.filter((r) => r.status === "occupied").length,
-    unpaid: rooms.filter(
-      (r) => r.status === "occupied" && !r.paid
-    ).length,
+    unpaid: rooms.filter((r) => r.status === "occupied" && !r.paid).length,
   };
 
   /* =========================
@@ -70,10 +62,7 @@ export default function RoomLayoutView() {
    * derived rentList
    * ========================= */
   const rentList: RentItem[] = selectedRoom
-    ? [
-        ...getRentByRoomId(buildingId, selectedRoom.id),
-        ...tempRents,
-      ]
+    ? [...getRentByRoomId(buildingId, selectedRoom.id), ...tempRents]
     : [];
 
   /* =========================
@@ -102,7 +91,8 @@ export default function RoomLayoutView() {
 
       {/* ===== Content ===== */}
       <Box sx={{ minHeight: "100vh", bgcolor: "#F9FAFB", py: 5 }}>
-        <Container maxWidth="xl">
+        {/* ปรับแก้ตรงนี้: กำหนดความกว้างสูงสุด 1200px และจัดกึ่งกลาง */}
+        <Container maxWidth={false} sx={{ maxWidth: "1200px", mx: "auto" }}>
           {/* ===== Stat ===== */}
           <Box
             sx={{
@@ -168,7 +158,7 @@ export default function RoomLayoutView() {
                   gridTemplateColumns: {
                     xs: "repeat(2, 1fr)",
                     sm: "repeat(4, 1fr)",
-                    md: "repeat(5, 1fr)", // 
+                    md: "repeat(5, 1fr)",
                   },
                   gap: 3,
                   justifyItems: "center",
