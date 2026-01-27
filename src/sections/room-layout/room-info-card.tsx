@@ -13,9 +13,10 @@ const RoomInfoCard: React.FC<Props> = ({ data }) => {
   return (
     <Card
       sx={{
-        maxWidth: 1200,
-        height: 180, // 👈 คุมขนาด card
-        mx: "auto", // 👈 จัด card กลางจอ
+        maxWidth: 1100,
+        width: "100%",
+        height: 180, // คุมขนาด card
+        mx: "auto", // card กลางจอ
         borderRadius: 4,
         border: "1px solid",
         borderColor: "grey.300",
@@ -33,7 +34,7 @@ const RoomInfoCard: React.FC<Props> = ({ data }) => {
       <Divider
         sx={{
           mb: 3,
-          borderColor: "grey.300", // สีเทาอ่อนตามรูป
+          borderColor: "grey.300",
         }}
       />
 
@@ -41,8 +42,9 @@ const RoomInfoCard: React.FC<Props> = ({ data }) => {
       <Stack
         direction="row"
         alignItems="center"
-        justifyContent="center" // 👈 content อยู่กลาง
-        divider={<Divider orientation="vertical" flexItem sx={{ mx: 5 }} />}
+        justifyContent="space-between"
+        width="100%"
+        divider={<Divider orientation="vertical" flexItem sx={{ mx: 3 }} />}
       >
         <RoomInfoItem label="เลขห้อง" value={data.roomNo} icon="room" />
 

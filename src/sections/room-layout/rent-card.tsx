@@ -1,5 +1,6 @@
-// sections/room-information/rent-card.tsx
-import { Box, Card, Typography, Stack } from "@mui/material";
+"use client";
+
+import { Box, Card, Typography, Stack, IconButton } from "@mui/material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
@@ -9,23 +10,41 @@ import { RentItem } from "@/src/models/types";
 type Props = {
   item: RentItem;
   onDelete: (id: string) => void;
+  onClick: (item: RentItem) => void;
 };
 
-const RentCard: React.FC<Props> = ({ item, onDelete }) => {
+const RentCard: React.FC<Props> = ({ item, onDelete, onClick }) => {
+  const handleDelete = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onDelete(item.id);
+  };
+
   return (
     <Card
+      onClick={() => onClick(item)} // เปิด tenant dialog
       sx={{
-        width: 1000,
-        height: 150,
-        borderRadius: 4,
-        boxShadow: "0px 2px 8px rgba(0,0,0,0.1)",
+        width: "100%",
+        maxWidth: 900,
+        minHeight: 130,
+        padding: "2",
+        borderRadius: 2.5,
         position: "relative",
         display: "flex",
         alignItems: "center",
         px: 5,
+        cursor: "pointer",
+        // Animation 
+        transition: "all 0.25s ease",
+        boxShadow: "0px 2px 8px rgba(0,0,0,0.08)",
+        "&:hover": {
+          transform: "translateY(-4px)",
+          boxShadow: "0px 10px 24px rgba(0,0,0,0.15)",
+          borderColor: "primary.main",
+        },
+        border: "1px solid transparent",
       }}
     >
-      {/* Approved */}
+      {/* Status */}
       <Typography
         fontSize={11}
         fontWeight={600}
@@ -44,31 +63,23 @@ const RentCard: React.FC<Props> = ({ item, onDelete }) => {
       </Typography>
 
       {/* Delete */}
-      <Box
-        onClick={() => onDelete(item.id)}
+      <IconButton
+        onClick={handleDelete}
         sx={{
           position: "absolute",
           bottom: 12,
           right: 12,
           bgcolor: "#e53935",
           color: "#fff",
-          px: 2,
-          py: 0.8,
           borderRadius: 1,
-          display: "flex",
-          alignItems: "center",
-          gap: 0.8,
-          cursor: "pointer",
+          px: 1.5,
           "&:hover": {
             bgcolor: "#d32f2f",
           },
         }}
       >
-        <DeleteOutlineIcon sx={{ fontSize: 18 }} />
-        <Typography fontSize={14} fontWeight={600}>
-          ลบ
-        </Typography>
-      </Box>
+        <DeleteOutlineIcon fontSize="small" />
+      </IconButton>
 
       {/* Content */}
       <Box
@@ -83,8 +94,8 @@ const RentCard: React.FC<Props> = ({ item, onDelete }) => {
         <Stack direction="row" spacing={3} alignItems="center">
           <Box
             sx={{
-              width: 120,
-              height: 120,
+              width: 80,
+              height: 80,
               borderRadius: "50%",
               bgcolor: "#c5d6f2",
               display: "flex",
@@ -92,40 +103,38 @@ const RentCard: React.FC<Props> = ({ item, onDelete }) => {
               justifyContent: "center",
             }}
           >
-            <PersonOutlineIcon sx={{ fontSize: 60, color: "#1f3349" }} />
+            <PersonOutlineIcon sx={{ fontSize: 45, color: "#1f3349" }} />
           </Box>
 
           <Box>
-            <Typography fontWeight={700} fontSize={24}>
+            <Typography fontWeight={600} fontSize={22}>
               {item.renterType}
             </Typography>
-            <Typography fontSize={18} color="text.secondary">
+            <Typography fontSize={16} color="text.secondary">
               ประเภทผู้เช่า
             </Typography>
           </Box>
         </Stack>
 
-        <Box sx={{ height: 120, bgcolor: "divider" }} />
+        <Box sx={{ height: 90, bgcolor: "divider" }} />
 
         {/* Right */}
         <Stack spacing={1} sx={{ pl: 4 }}>
           <Stack direction="row" spacing={1.5} alignItems="center">
             <DescriptionOutlinedIcon fontSize="small" />
-            <Typography fontSize={16}>
-              เลขที่การเช่า : {item.rentNo}
-            </Typography>
+            <Typography fontSize={14}>เลขที่การเช่า : {item.rentNo}</Typography>
           </Stack>
 
           <Stack direction="row" spacing={1.5} alignItems="center">
             <CalendarTodayOutlinedIcon fontSize="small" />
-            <Typography fontSize={16}>
+            <Typography fontSize={14}>
               วันที่เริ่มต้น : {item.startDate}
             </Typography>
           </Stack>
 
           <Stack direction="row" spacing={1.5} alignItems="center">
             <CalendarTodayOutlinedIcon fontSize="small" />
-            <Typography fontSize={16}>
+            <Typography fontSize={14}>
               วันที่สิ้นสุด : {item.endDate}
             </Typography>
           </Stack>

@@ -28,12 +28,12 @@ const RoomInfoItem: React.FC<RoomInfoItemProps> = ({
   icon,
 }) => {
   return (
-    <Stack direction="row" spacing={2} alignItems="center">
+    <Stack direction="row" spacing={1.5} alignItems="center">
       {/* Icon */}
       <Box
         sx={{
-          width: 48,
-          height: 48,
+          width: 40,
+          height: 40,
           borderRadius: "50%",
           bgcolor: "#e8f0ff",
           color: "#4c6ef5",
@@ -48,10 +48,10 @@ const RoomInfoItem: React.FC<RoomInfoItemProps> = ({
 
       {/* Text */}
       <Box>
-        <Typography fontSize={13} color="text.secondary">
+        <Typography fontSize={10} color="text.secondary">
           {label}
         </Typography>
-        <Typography fontSize={18} fontWeight={600}>
+        <Typography fontSize={16} fontWeight={500}>
           {value}
         </Typography>
       </Box>
