@@ -60,4 +60,28 @@ export const RENT_BY_ROOM: Record<number, RentItem[]> = {
       status: "next",
     }),
   ],
+
+    107: [],
+
+    108: [
+    createMockRent({
+      id: "rent-102-1",
+      rentNo: "CT01251487",
+      renterType: "บุคคลธรรมดา",
+      startDate: "01/12/2568",
+      endDate: "30/11/2569",
+      status: "ending",
+    }),
+  ],
+
+  109: [
+    createMockRent({
+      id: "rent-103-1",
+      rentNo: "CT01251488",
+      renterType: "บุคคลธรรมดา",
+      startDate: "01/01/2568",
+      endDate: "31/12/2568",
+      status: "active",
+    }),
+  ],
 };
