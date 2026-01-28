@@ -38,7 +38,7 @@ const SUMMARY_ID_2 = calculateSummary(ITEMS_ID_2);
 
 
 const ITEMS_ID_3: IInvoiceDetailItem[] = [
-  { id: 1, dueDate: "2026", roomNumber: "301", customerName: "ร้านค้า C", rentAmount: 10000, elecAmount: 2000, waterAmount: 500, otherAmount: 0, totalAmount: 12500, status: "PENDING" },
+  { id: 1, dueDate: "2026", roomNumber: "301", customerName: "ร้านค้า C", rentAmount: 10000, elecAmount: 2000, waterAmount: 500, otherAmount: 0, totalAmount: 12500, status: "CONFIRM" },
 ];
 const SUMMARY_ID_3 = calculateSummary(ITEMS_ID_3);
 
@@ -73,7 +73,7 @@ export const INVOICE_PROCESS_MOCK_DATA: IInvoiceProcessItem[] = [
     period: '11/20/2568',
     invoiceCount: ITEMS_ID_3.length, 
     totalAmount: SUMMARY_ID_3.grandTotal, 
-    status: 'PENDING',
+    status: 'FINISH',
   },
 ];
 

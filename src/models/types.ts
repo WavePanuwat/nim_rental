@@ -171,3 +171,23 @@ export type IInvoiceDetailData = {
   summary: IInvoiceDetailSummary;
   items: IInvoiceDetailItem[];
 };
+
+export type PaymentRecord = {
+  id: number;
+  processDate: string;
+  cycle: string;
+  invoiceCount: number;
+  totalAmount: string;
+  status: string;
+};
+
+export type InvoiceRecord = {
+  id: number;
+  date: string;
+  invoiceNo: string;
+  leaseNo: string;
+  tenant: string;
+  amount: string; 
+};
+
+
