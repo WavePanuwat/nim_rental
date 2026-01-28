@@ -89,6 +89,54 @@ export type TenantInfo = {
   employeeCode?: string;   // รหัสพนักงาน
 };
 
+export type RentalProcessStatus = 'CONFIRM' | 'PENDING' | 'CANCEL';
+
+export interface RentalProcessItem {
+  id: string;
+  processDate: string;
+  cycle: string;
+  invoiceCount: number;
+  totalAmount: number;
+  status: RentalProcessStatus;
+}
+
+export interface RentalProcessDetail {
+  id: string;
+  contractNo: string;
+  roomNo: string;
+  rent: number;
+  water: number;
+  electric: number;
+  total: number;
+  status: 'CONFIRM' | 'PENDING';
+}
+
+export interface InvoiceItem {
+  id: number;
+  description: string;
+  serialNo: string;
+  effectiveDate: string;
+  amountBeforeTax: number;
+  tax: number;
+  wht: number;
+  total: number;
+  note: string;
+}
+
+export interface InvoiceDetail {
+  id: string; 
+  cycle: string;
+  contractNo: string;
+  docDate: string;
+  property: string;
+  tenant: string;
+  address: string;
+  note: string;
+  status: 'CONFIRM' | 'PENDING';
+  totalAmount: number;
+  items: InvoiceItem[];
+}
+
 export interface IInvoiceProcessItem {
   id: string;
   processDate: string;
