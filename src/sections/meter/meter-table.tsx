@@ -92,16 +92,9 @@ export default function MeterTable({ data, meterType }: MeterTableProps) {
                 </Typography>
               </TableCell>
               <TableCell align="center">
-                <Chip
-                  label={row.serialNo}
-                  size="small"
-                  sx={{
-                    bgcolor: "#EDF7ED",
-                    color: "#2E7D32",
-                    fontWeight: 600,
-                    borderRadius: 1,
-                  }}
-                />
+                <Typography variant="body2" color="#1A202C">
+                  {row.serialNo}
+                </Typography>
               </TableCell>
               <TableCell align="left">
                 <Typography variant="body2" color="#1A202C">
@@ -204,7 +197,7 @@ export default function MeterTable({ data, meterType }: MeterTableProps) {
                         color="#4A5568"
                         sx={{ ml: 0.5 }}
                       >
-                        Reset
+                        Reset มิเตอร์
                       </Typography>
                     }
                     sx={{ m: 0 }}
@@ -230,7 +223,7 @@ export default function MeterTable({ data, meterType }: MeterTableProps) {
                         color="#4A5568"
                         sx={{ ml: 0.5 }}
                       >
-                        เปลี่ยน
+                        เปลี่ยนมิเตอร์
                       </Typography>
                     }
                     sx={{ m: 0 }}
