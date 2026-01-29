@@ -42,6 +42,7 @@ export default function PaymentModelTable({ data }: Props) {
               { id: "id", label: "ลำดับ", align: "center" },
               { id: "date", label: "วันที่ใบแจ้งหนี้", align: "center" },
               { id: "invoiceNo", label: "เลขที่ใบแจ้งหนี้", align: "center" },
+              { id: "property", label: "ห้อง", align: "center" },
               { id: "leaseNo", label: "เลขที่การเช่า", align: "center" },
               { id: "tenant", label: "ผู้เช่า", align: "center" },
               { id: "amount", label: "จำนวนเงิน", align: "center" },
@@ -87,9 +88,9 @@ export default function PaymentModelTable({ data }: Props) {
                 <TableCell align="center">{row.id}</TableCell>
                 <TableCell align="center">{row.date}</TableCell>
                 <TableCell align="center">{row.invoiceNo}</TableCell>
+                <TableCell align="center">{row.property}</TableCell>
                 <TableCell align="center">{row.leaseNo}</TableCell>
                 <TableCell align="center">{row.tenant}</TableCell>
-
                 <TableCell align="center">{row.amount}</TableCell>
 
                 <TableCell align="center">
@@ -121,7 +122,7 @@ export default function PaymentModelTable({ data }: Props) {
             // กรณีไม่มีข้อมูล
             <TableRow>
               <TableCell
-                colSpan={7}
+                colSpan={8}
                 align="center"
                 sx={{ py: 4, color: "text.secondary" }}
               >
