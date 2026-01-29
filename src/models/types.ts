@@ -174,10 +174,10 @@ export type IInvoiceDetailData = {
 
 export type PaymentRecord = {
   id: number;
-  processDate: string;
-  cycle: string;
-  invoiceCount: number;
-  totalAmount: string;
+  date: string;
+  leaseNo: string;
+  tenant: string;
+  amount: string;
   status: string;
 };
 
@@ -185,9 +185,10 @@ export type InvoiceRecord = {
   id: number;
   date: string;
   invoiceNo: string;
+  property: string;
   leaseNo: string;
   tenant: string;
-  amount: string; 
+  amount: string;
 };
 
 

@@ -23,9 +23,7 @@ export default function HomeView() {
   // ✅ filter ตาม group (tab)
   const filteredBuildings = useMemo(() => {
     const groups: BuildingGroup[] = ["transport", "leasing", "daily"];
-    return buildings.filter(
-      (item) => item.group === groups[tabValue]
-    );
+    return buildings.filter((item) => item.group === groups[tabValue]);
   }, [buildings, tabValue]);
 
   return (
@@ -59,9 +57,7 @@ export default function HomeView() {
                 <Grid size={{ xs: 12, md: 6 }} key={building.id}>
                   <Card
                     building={building}
-                    onManage={(id) =>
-                      router.push(`/room-layout?id=${id}`)
-                    }
+                    onManage={(id) => router.push(`/room-layout?id=${id}`)}
                   />
                 </Grid>
               ))}
